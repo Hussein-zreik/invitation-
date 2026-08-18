@@ -52,13 +52,13 @@ body.is-sealed{overflow:hidden;height:100dvh}
   grid-template-rows:1fr auto;
   padding:6vh 1.25rem 6vh;
   background:
-    radial-gradient(58% 44% at 50% 44%,#fffdf7 0%,#efe7d8 46%,#d5c8ae 78%,#c3b498 100%);
-  transition:opacity .9s ease,transform .9s ease,visibility .9s;
+    radial-gradient(58% 44% at 50% 44%,#f7f3ea 0%,#e6dfd0 44%,#cfc4ac 76%,#bcb096 100%);
+  transition:opacity .85s ease,transform 1s cubic-bezier(.4,0,.6,1),visibility .85s;
 }
 .envelope-scene.is-open{
   opacity:0;
   visibility:hidden;
-  transform:scale(1.35);
+  transform:scale(1.12);
   pointer-events:none;
 }
 
@@ -97,46 +97,53 @@ body.is-sealed{overflow:hidden;height:100dvh}
 .envelope:focus-visible{outline:2px solid var(--gold);outline-offset:1rem;border-radius:.5rem}
 @media (hover:hover){.envelope:hover{transform:translateY(-.4rem)}}
 
-.env-photo,.env-inside,.env-flap{
+.env-photo,.env-inside,.env-flap-face{
   position:absolute;inset:0;
   background:url("../img/envelope.webp") center/100% 100% no-repeat;
 }
 .env-photo{z-index:1;border-radius:.2rem}
 
-/* the flap: the top panel plus the wax seal, as one piece */
+/* the flap: the top panel plus the wax seal, turning as one piece */
 .env-flap{
+  position:absolute;inset:0;
   z-index:5;
   transform-origin:top center;
+  transform-style:preserve-3d;
   transform:rotateX(0deg);
-  transition:transform 1.15s cubic-bezier(.6,.02,.2,1),
-             filter .5s ease,
-             z-index 0s linear .55s;
-  filter:drop-shadow(0 .3rem .45rem rgba(140,110,60,.18));
+  transition:transform .95s cubic-bezier(.55,.03,.25,1),
+             z-index 0s linear .48s;
+}
+.envelope.is-opening .env-flap{transform:rotateX(-166deg);z-index:1}
+
+.env-flap-face,.env-flap-back{
+  position:absolute;inset:0;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
   clip-path:polygon(
-    -4.30% 0.00%, 104.30% 0.00%, 60.24% 44.71%, 63.34% 46.25%, 65.75% 48.13%,
-    67.33% 50.27%, 67.98% 52.56%, 67.69% 54.87%, 66.45% 57.08%, 64.35% 59.07%,
-    61.49% 60.75%, 58.01% 62.01%, 54.12% 62.79%, 50.00% 63.06%, 45.88% 62.79%,
-    41.99% 62.01%, 38.51% 60.75%, 35.65% 59.07%, 33.55% 57.08%, 32.31% 54.87%,
-    32.02% 52.56%, 32.67% 50.27%, 34.25% 48.13%, 36.66% 46.25%, 39.76% 44.71%
+    -2.89% 0.00%, 102.89% 0.00%, 61.29% 43.62%, 64.28% 45.24%, 66.56% 47.19%, 67.98% 49.38%, 68.50% 51.69%, 68.07% 54.01%, 66.73% 56.21%, 64.53% 58.19%, 61.60% 59.85%, 58.08% 61.09%, 54.14% 61.87%, 50.00% 62.13%, 45.86% 61.87%, 41.92% 61.09%, 38.40% 59.85%, 35.47% 58.19%, 33.27% 56.21%, 31.93% 54.01%, 31.50% 51.69%, 32.02% 49.38%, 33.44% 47.19%, 35.72% 45.24%, 38.71% 43.62%
   );
 }
-.envelope.is-opening .env-flap{transform:rotateX(-168deg);z-index:1;filter:none}
+.env-flap-face{filter:drop-shadow(0 .3rem .45rem rgba(140,110,60,.16))}
+/* the reverse of the flap: plain paper, shaded towards the fold */
+.env-flap-back{
+  transform:rotateX(180deg);
+  background:linear-gradient(0deg,#ffffff 0%,#fbfaf7 58%,#eceae4 100%);
+  box-shadow:inset 0 -.5rem 1.2rem rgba(150,125,85,.2);
+}
 
 /* what the flap was covering: the inside of the envelope */
 .env-inside{
   z-index:3;
-  background:
-    linear-gradient(180deg,#dcc3ae 0%,#e9d3c2 38%,#d9bfa9 100%);
-  box-shadow:inset 0 .5rem 1.4rem rgba(140,102,70,.4);
-  clip-path:polygon(-4.30% 0%, 104.30% 0%, 50% 55.1%);
+  background:linear-gradient(180deg,#d9d5cd 0%,#e9e6e0 38%,#d3cfc6 100%);
+  box-shadow:inset 0 .5rem 1.4rem rgba(120,112,95,.4);
+  clip-path:polygon(-2.89% 0%, 102.89% 0%, 50% 55.45%);
 }
 /* what the wax seal was covering: plain envelope paper */
 .env-under-seal{
   z-index:2;
-  background:
-    radial-gradient(circle at 42% 34%,#f7e6da 0%,#f0dbcc 55%,#e6cdbb 100%);
-  box-shadow:inset 0 0 .8rem rgba(170,130,100,.25);
-  clip-path:ellipse(18% 10.06% at 50% 53%);
+  background:radial-gradient(circle at 42% 34%,#fdfcfa 0%,#f5f3ee 55%,#e9e6df 100%);
+  box-shadow:inset 0 0 .8rem rgba(150,140,120,.22);
+  clip-path:ellipse(18.5% 10.33% at 50% 51.8%);
 }
 
 /* the card inside */
@@ -149,9 +156,9 @@ body.is-sealed{overflow:hidden;height:100dvh}
   border:1px solid rgba(190,160,120,.4);
   box-shadow:0 .5rem 1.2rem rgba(120,95,55,.2);
   display:grid;place-items:center;
-  transition:transform 1s cubic-bezier(.2,.8,.3,1) .55s;
+  transition:transform .8s cubic-bezier(.2,.8,.3,1) .72s;
 }
-.envelope.is-opening .env-letter{transform:translateY(-36%);z-index:4}
+.envelope.is-opening .env-letter{transform:translateY(-34%);z-index:4}
 .env-letter-inner{display:grid;justify-items:center;gap:.5rem;padding-top:14%}
 .letter-script{font-family:var(--f-script);font-size:clamp(1.5rem,7vw,2rem);color:var(--gold)}
 .letter-rule{width:3.5rem;height:1px;background:var(--gold-light)}
@@ -161,8 +168,8 @@ body.is-sealed{overflow:hidden;height:100dvh}
 .seal-ring{
   position:absolute;
   z-index:6;
-  left:50%;top:53%;
-  width:38%;aspect-ratio:1;
+  left:50%;top:51.8%;
+  width:39%;aspect-ratio:1;
   translate:-50% -50%;
   border-radius:50%;
   border:1px solid rgba(176,141,63,.5);
