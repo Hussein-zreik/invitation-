@@ -19,9 +19,9 @@ from that one file — names, parents, the date, the venue, the RSVP number, the
 
 ```js
 window.INVITE = {
-  groom: { name: "Daanish", parents: "Mr & Mrs Ch. Hussaini" },
-  bride: { name: "Adeena",  parents: "Mr & Mrs Ch. Farooqi" },
-  monogram: "D&A",              // the letters on the wax seal
+  groom: { name: "Hussein", parents: "Mr & Mrs [Groom's Family]" },
+  bride: { name: "Maha",    parents: "Mr & Mrs [Bride's Family]" },
+  monogram: "H&M",              // the letters on the wax seal
   ceremony: "Engagement",
   welcomeLine: "Welcome to our Engagement",
   date: { day: "10", month: "January", year: "2027",
@@ -59,7 +59,7 @@ it through Jekyll.
 
 ### A custom domain (optional)
 
-Add a file named `CNAME` at the root containing just your domain (e.g. `daanish-adeena.com`),
+Add a file named `CNAME` at the root containing just your domain (e.g. `hussein-maha.com`),
 then point a `CNAME` DNS record at `<your-username>.github.io`.
 
 ## 3. How it behaves
@@ -67,7 +67,7 @@ then point a `CNAME` DNS record at `<your-username>.github.io`.
 | Section  | What happens |
 |----------|--------------|
 | Envelope | The page is locked until the guest taps. The wax seal lifts, the flap folds back, the letter rises, and the scene dissolves into the invitation. |
-| Hero     | An illustrated arch — mosque, lanterns, the couple and their reflection — drawn entirely in inline SVG, so it stays sharp on any screen and adds no image weight. |
+| Hero     | An illustrated arch — the sun setting over the water, hanging lanterns, and the couple silhouetted on the shore — drawn entirely in inline SVG, so it stays sharp on any screen and adds no image weight. |
 | Details  | The formal invitation: Bismillah, both names, both families, and your message. |
 | The Date | Three cards covered by a scratch layer. Drag across a card to rub it away; it snaps open at roughly a third cleared, and the weekday and time fade in once all three are open. |
 | Venue    | Opens Maps, or downloads a calendar event. |

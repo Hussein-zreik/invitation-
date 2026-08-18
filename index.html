@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Daanish &amp; Adeena — Engagement Invitation</title>
+<title>Hussein &amp; Maha — Engagement Invitation</title>
 <meta name="description" content="You are warmly invited to celebrate our engagement.">
 <meta name="theme-color" content="#f6ece2">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Daanish &amp; Adeena — Engagement Invitation">
+<meta property="og:title" content="Hussein &amp; Maha — Engagement Invitation">
 <meta property="og:description" content="You are warmly invited to celebrate our engagement.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,7 +82,7 @@
     </div>
 
     <div class="wax-seal" aria-hidden="true">
-      <span class="wax-seal-text" data-bind="monogram">D&amp;A</span>
+      <span class="wax-seal-text" data-bind="monogram">H&amp;M</span>
     </div>
   </div>
 
@@ -140,13 +140,14 @@
       <svg viewBox="0 0 400 470" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
         <defs>
           <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"   stop-color="#fffaf2"/>
-            <stop offset="50%"  stop-color="#fbe8ce"/>
-            <stop offset="100%" stop-color="#f2d3a8"/>
+            <stop offset="0%"   stop-color="#fdeee1"/>
+            <stop offset="32%"  stop-color="#fbdcba"/>
+            <stop offset="62%"  stop-color="#f8c795"/>
+            <stop offset="100%" stop-color="#f2b57c"/>
           </linearGradient>
           <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"   stop-color="#eed4ae"/>
-            <stop offset="100%" stop-color="#fbf1e1"/>
+            <stop offset="0%"   stop-color="#e9bf92"/>
+            <stop offset="100%" stop-color="#fbeddb"/>
           </linearGradient>
           <radialGradient id="sun" cx="50%" cy="50%">
             <stop offset="0%"   stop-color="#fff6e6"/>
@@ -156,21 +157,16 @@
             <path d="M40,470 L40,208 C40,110 118,38 200,38 C282,38 360,110 360,208 L360,470 Z"/>
           </clipPath>
 
-          <!-- mosque, drawn around a centre line with its platform at y = 0 -->
-          <g id="mosque">
-            <rect x="-128" y="-6" width="256" height="6"/>
-            <path d="M-48,-26 L-48,-32 A48,44 0 0 1 48,-32 L48,-26 Z"/>
-            <rect x="-48" y="-26" width="96" height="20"/>
-            <rect x="-3" y="-88" width="6" height="12"/><circle cx="0" cy="-92" r="4"/>
-            <path d="M-104,-6 L-104,-18 A20,18 0 0 1 -64,-18 L-64,-6 Z"/>
-            <path d="M64,-6 L64,-18 A20,18 0 0 1 104,-18 L104,-6 Z"/>
-            <path d="M-124,-6 L-124,-72 h13 v66 z"/>
-            <path d="M-130,-72 h25 v-5 h-25 z"/>
-            <path d="M-117.5,-94 l-8,17 h16 z"/><circle cx="-117.5" cy="-98" r="3"/>
-            <path d="M111,-6 L111,-72 h13 v66 z"/>
-            <path d="M105,-72 h25 v-5 h-25 z"/>
-            <path d="M117.5,-94 l-8,17 h16 z"/><circle cx="117.5" cy="-98" r="3"/>
-          </g>
+          <!-- the setting sun and its glow -->
+          <radialGradient id="sunDisc" cx="50%" cy="45%">
+            <stop offset="0%"   stop-color="#ffe7b4"/>
+            <stop offset="55%"  stop-color="#f6c877"/>
+            <stop offset="100%" stop-color="#e9a95a"/>
+          </radialGradient>
+          <linearGradient id="sunPath" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#f7cd86" stop-opacity=".85"/>
+            <stop offset="100%" stop-color="#f7cd86" stop-opacity="0"/>
+          </linearGradient>
 
           <!-- the couple, standing with their feet at y = 0 -->
           <g id="couple">
@@ -193,22 +189,48 @@
 
         <g clip-path="url(#archClip)">
           <rect x="0" y="0" width="400" height="470" fill="url(#sky)"/>
-          <circle cx="200" cy="272" r="98" fill="url(#sun)"/>
 
-          <g fill="#e2bc90"><use href="#mosque" transform="translate(200,330) scale(.86)"/></g>
+          <!-- sun halo, disc and the clouds drifting across it -->
+          <circle cx="200" cy="300" r="132" fill="url(#sun)"/>
+          <circle cx="200" cy="300" r="56" fill="url(#sunDisc)"/>
+          <g fill="#f6d9ae" opacity=".55">
+            <ellipse cx="176" cy="268" rx="72" ry="5"/>
+            <ellipse cx="228" cy="292" rx="86" ry="6"/>
+            <ellipse cx="188" cy="316" rx="64" ry="4.5"/>
+          </g>
 
+          <!-- distant birds -->
+          <g fill="none" stroke="#d3a877" stroke-width="1.6" stroke-linecap="round" opacity=".8">
+            <path d="M108,182 c5,-5 9,-5 13,0 c4,-5 9,-5 13,0"/>
+            <path d="M136,158 c4,-4 7,-4 10,0 c3,-4 7,-4 10,0"/>
+            <path d="M268,196 c4,-4 7,-4 10,0 c3,-4 7,-4 10,0"/>
+          </g>
+
+          <!-- the sea -->
           <rect x="0" y="330" width="400" height="140" fill="url(#water)"/>
-          <g fill="#e2bc90" opacity=".22">
-            <use href="#mosque" transform="translate(200,330) scale(.86,-.86)"/>
+          <path d="M182,330 L218,330 L252,470 L148,470 Z" fill="url(#sunPath)"/>
+          <g fill="#f3c789" opacity=".55">
+            <rect x="182" y="340" width="36" height="2.6" rx="1.3"/>
+            <rect x="174" y="356" width="52" height="2.6" rx="1.3"/>
+            <rect x="166" y="374" width="68" height="2.8" rx="1.4"/>
+            <rect x="156" y="396" width="88" height="3" rx="1.5"/>
+            <rect x="146" y="420" width="108" height="3" rx="1.5"/>
+          </g>
+          <g fill="#e0bc93" opacity=".38">
+            <rect x="40" y="352" width="46" height="2.2" rx="1.1"/>
+            <rect x="300" y="366" width="54" height="2.2" rx="1.1"/>
+            <rect x="62" y="392" width="62" height="2.4" rx="1.2"/>
+            <rect x="276" y="410" width="70" height="2.4" rx="1.2"/>
           </g>
 
-          <g fill="#c08f52" color="#c08f52">
-            <use href="#couple" transform="translate(196,438) scale(1.18)"/>
+          <!-- the couple, silhouetted against the sun -->
+          <g fill="#a8703a" color="#a8703a">
+            <use href="#couple" transform="translate(196,442) scale(1.22)"/>
           </g>
-          <g fill="#c08f52" color="#c08f52" opacity=".15">
-            <use href="#couple" transform="translate(196,440) scale(1.18,-1.18)"/>
+          <g fill="#a8703a" color="#a8703a" opacity=".16">
+            <use href="#couple" transform="translate(196,444) scale(1.22,-1.22)"/>
           </g>
-          <ellipse cx="203" cy="439" rx="56" ry="5" fill="#a87f4c" opacity=".2"/>
+          <ellipse cx="203" cy="443" rx="58" ry="5" fill="#a87f4c" opacity=".22"/>
 
           <!-- hanging lanterns -->
           <g stroke="#c9a366" stroke-width="1.6" fill="#fae1b4">
@@ -237,9 +259,9 @@
     <div class="hero-copy">
       <p class="eyebrow reveal" data-bind="welcomeLine">Welcome to our Engagement</p>
       <h1 class="couple reveal">
-        <span class="couple-name" data-bind="groomName">Daanish</span>
+        <span class="couple-name" data-bind="groomName">Hussein</span>
         <span class="amp">&amp;</span>
-        <span class="couple-name" data-bind="brideName">Adeena</span>
+        <span class="couple-name" data-bind="brideName">Maha</span>
       </h1>
       <p class="hero-date reveal"><span data-bind="heroDate">10 · 01 · 2027</span></p>
     </div>
@@ -258,17 +280,17 @@
       <p class="caps-sm">You are invited to the</p>
       <p class="caps-sm caps-sm--strong" data-bind="ceremonyCaps">ENGAGEMENT OF</p>
 
-      <h2 class="script-xl" data-bind="groomName">Daanish</h2>
+      <h2 class="script-xl" data-bind="groomName">Hussein</h2>
       <span class="divider" aria-hidden="true"></span>
       <p class="caps-xs">Son of</p>
-      <p class="caps-sm" data-bind="groomParents">Mr &amp; Mrs Ch. Hussaini</p>
+      <p class="caps-sm" data-bind="groomParents">Mr &amp; Mrs [Groom&rsquo;s Family]</p>
 
       <p class="script-with">With</p>
 
-      <h2 class="script-xl" data-bind="brideName">Adeena</h2>
+      <h2 class="script-xl" data-bind="brideName">Maha</h2>
       <span class="divider" aria-hidden="true"></span>
       <p class="caps-xs">Daughter of</p>
-      <p class="caps-sm" data-bind="brideParents">Mr &amp; Mrs Ch. Farooqi</p>
+      <p class="caps-sm" data-bind="brideParents">Mr &amp; Mrs [Bride&rsquo;s Family]</p>
 
       <p class="script-lg">Dear Friends and Family</p>
       <p class="body-text" data-bind="invitationLine"></p>
@@ -342,7 +364,7 @@
     <p class="dua reveal" data-bind="closingDua"></p>
     <p class="dua-ref reveal" data-bind="closingDuaRef"></p>
     <p class="signoff reveal">
-      <span data-bind="groomName">Daanish</span> <span class="amp">&amp;</span> <span data-bind="brideName">Adeena</span>
+      <span data-bind="groomName">Hussein</span> <span class="amp">&amp;</span> <span data-bind="brideName">Maha</span>
     </p>
   </footer>
 </main>

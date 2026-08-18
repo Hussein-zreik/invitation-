@@ -5,14 +5,14 @@
 window.INVITE = {
   /* --- The couple --- */
   groom: {
-    name: "Daanish",
-    parents: "Mr & Mrs Ch. Hussaini"
+    name: "Hussein",
+    parents: "Mr & Mrs [Groom's Family]"
   },
   bride: {
-    name: "Adeena",
-    parents: "Mr & Mrs Ch. Farooqi"
+    name: "Maha",
+    parents: "Mr & Mrs [Bride's Family]"
   },
-  monogram: "D&A",          // shown on the wax seal
+  monogram: "H&M",          // shown on the wax seal
   ceremony: "Engagement",          // used in the invitation heading
   welcomeLine: "Welcome to our Engagement",   // shown on the opening screen
 
@@ -46,7 +46,7 @@ window.INVITE = {
      Phone in international format, digits only (no + or spaces).  */
   rsvp: {
     whatsapp: "923001234567",
-    message: "Assalamu Alaikum! I received your invitation — I would love to attend the engagement of Daanish & Adeena.",
+    message: "Assalamu Alaikum! I received your invitation — I would love to attend the engagement of Hussein & Maha.",
     byDate: "20 December 2026"
   },
 
