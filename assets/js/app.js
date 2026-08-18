@@ -135,20 +135,32 @@
       canvas.height = Math.round(rect.height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+      // gold foil: a multi-stop diagonal so the "metal" catches light along the card
       var g = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-      g.addColorStop(0,   "#f7e6d2");
-      g.addColorStop(0.45,"#efd7bd");
-      g.addColorStop(1,   "#e6c8a8");
+      g.addColorStop(0,    "#c9a558");
+      g.addColorStop(0.18, "#e8d5a9");
+      g.addColorStop(0.34, "#f7efd6");
+      g.addColorStop(0.5,  "#c9a558");
+      g.addColorStop(0.66, "#8c6d2a");
+      g.addColorStop(0.82, "#e2c887");
+      g.addColorStop(1,    "#a8813c");
       ctx.globalCompositeOperation = "source-over";
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, rect.width, rect.height);
 
-      // faint sparkle so the cover reads as "scratch me"
-      ctx.fillStyle = "rgba(255,255,255,.55)";
+      // a brighter band across the corner, the way foil creases
+      var sheen = ctx.createLinearGradient(0, rect.height, rect.width, 0);
+      sheen.addColorStop(0,    "rgba(255,255,255,0)");
+      sheen.addColorStop(0.42, "rgba(255,252,240,.55)");
+      sheen.addColorStop(0.55, "rgba(255,255,255,0)");
+      ctx.fillStyle = sheen;
+      ctx.fillRect(0, 0, rect.width, rect.height);
+
+      ctx.fillStyle = "rgba(255,250,235,.75)";
       ctx.font = (rect.width * 0.22) + "px serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText("✦", rect.width / 2, rect.height / 2);
+      ctx.fillText("\u2726", rect.width / 2, rect.height / 2);
     }
 
     function scratchAt(x, y) {

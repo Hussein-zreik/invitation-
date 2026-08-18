@@ -67,9 +67,9 @@ then point a `CNAME` DNS record at `<your-username>.github.io`.
 | Section  | What happens |
 |----------|--------------|
 | Envelope | The page is locked until the guest taps. The wax seal lifts, the flap folds back, the letter rises, and the scene dissolves into the invitation. |
-| Hero     | An illustrated arch — the sun setting over the water, hanging lanterns, and the couple silhouetted on the shore — drawn entirely in inline SVG, so it stays sharp on any screen and adds no image weight. |
+| Hero     | An arch drawn entirely in gold hairlines — the sun setting into the water, hanging lanterns, and the couple as line art. Inline SVG, so it stays sharp on any screen and adds no image weight. |
 | Details  | The formal invitation: Bismillah, both names, both families, and your message. |
-| The Date | Three cards covered by a scratch layer. Drag across a card to rub it away; it snaps open at roughly a third cleared, and the weekday and time fade in once all three are open. |
+| The Date | Three cards covered by a gold foil layer. Drag across a card to rub it away; it snaps open at roughly a third cleared, and the weekday and time fade in once all three are open. |
 | Venue    | Opens Maps, or downloads a calendar event. |
 | RSVP     | Opens WhatsApp with a pre-written message. |
 
@@ -79,6 +79,6 @@ immediately for guests who have "reduce motion" turned on.
 
 ## 4. Fonts
 
-Typography comes from Google Fonts (Cormorant Garamond, Cinzel, Great Vibes, Amiri).
+Typography comes from Google Fonts (Playfair Display, Cinzel, Great Vibes, Amiri).
 They load over the network; if a guest is offline the page falls back to system serifs
 and still reads correctly.
