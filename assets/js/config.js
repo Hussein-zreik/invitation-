@@ -5,12 +5,14 @@
 window.INVITE = {
   /* --- The couple --- */
   groom: {
-    name: "Hussein",
-    parents: "Mr & Mrs [Groom's Family]"
+    name: "Hussein",                  // shown large, in script
+    fullName: "Hussein Zreik",        // shown on the invitation itself
+    parents: "Mr & Mrs Zreik"
   },
   bride: {
     name: "Maha",
-    parents: "Mr & Mrs [Bride's Family]"
+    fullName: "Maha Maatouk",
+    parents: "Mr & Mrs Maatouk"
   },
   monogram: "H&M",          // shown on the wax seal
   ceremony: "Engagement",          // used in the invitation heading
@@ -20,12 +22,15 @@ window.INVITE = {
      `iso` drives the countdown and the "Add to calendar" file.
      Format: YYYY-MM-DDTHH:MM:SS  (local time of the venue)      */
   date: {
-    day: "10",
-    month: "January",
-    year: "2027",
-    weekday: "Sunday",
-    time: "5:00 PM onwards",
-    iso: "2027-01-10T17:00:00",
+    day: "TBC",                       // the day of the month, once it is set
+    month: "September",
+    year: "2026",
+    weekday: "",                      // e.g. "Saturday" — leave empty if unknown
+    time: "",                         // e.g. "7:00 PM onwards"
+    /* Fill `iso` in once the day is fixed (YYYY-MM-DDTHH:MM:SS) and the
+       countdown and the "Add to calendar" button appear on their own.
+       While it is empty, both stay hidden.                              */
+    iso: "",
     durationHours: 5
   },
 
@@ -47,7 +52,7 @@ window.INVITE = {
   rsvp: {
     whatsapp: "923001234567",
     message: "Assalamu Alaikum! I received your invitation — I would love to attend the engagement of Hussein & Maha.",
-    byDate: "20 December 2026"
+    byDate: "1 August 2026"
   },
 
   /* --- Optional background music ---

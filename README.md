@@ -20,22 +20,28 @@ from that one file — names, parents, the date, the venue, the RSVP number, the
 
 ```js
 window.INVITE = {
-  groom: { name: "Hussein", parents: "Mr & Mrs [Groom's Family]" },
-  bride: { name: "Maha",    parents: "Mr & Mrs [Bride's Family]" },
-  monogram: "H&M",              // the letters on the wax seal
+  groom: { name: "Hussein", fullName: "Hussein Zreik", parents: "Mr & Mrs Zreik" },
+  bride: { name: "Maha",    fullName: "Maha Maatouk",  parents: "Mr & Mrs Maatouk" },
+  monogram: "H&M",              // the letters on the wax seal (part of the image)
   ceremony: "Engagement",
   welcomeLine: "Welcome to our Engagement",
-  date: { day: "10", month: "January", year: "2027",
-          iso: "2027-01-10T17:00:00" },   // drives the countdown + calendar file
+  date: { day: "TBC", month: "September", year: "2026",
+          iso: "" },                      // fill in to switch the countdown on
   ...
 };
 ```
 
 A few notes:
 
-- **`date.iso`** must stay in `YYYY-MM-DDTHH:MM:SS` form. It powers the live countdown
-  and the "Add to calendar" (`.ics`) download. The three scratch cards use the separate
-  `day` / `month` / `year` strings, so you can write them however you like.
+- **`name` is the short name** shown large in script; **`fullName`** is what appears on
+  the invitation itself. Leave `fullName` out and the short name is used for both.
+- **`date.iso`** must be in `YYYY-MM-DDTHH:MM:SS` form. It powers the live countdown and
+  the "Add to calendar" (`.ics`) download — while it is empty **both hide themselves**,
+  so nothing counts down to a date that is not fixed yet. The three scratch cards use the
+  separate `day` / `month` / `year` strings, so you can write them however you like; a
+  `day` of `"TBC"` is left out of the line under the couple's names.
+- **`date.weekday` and `date.time`** join into the line under the cards, and that line
+  disappears entirely when both are empty.
 - **`rsvp.whatsapp`** is an international number with digits only — no `+`, no spaces
   (e.g. Lebanon `961XXXXXXXX`, Pakistan `92XXXXXXXXXX`). Leave it empty to hide the button.
 - **`venue.mapsUrl`** — paste a Google Maps share link for an exact pin, or delete the

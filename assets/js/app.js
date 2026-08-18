@@ -19,6 +19,8 @@
     welcomeLine:  cfg.welcomeLine,
     groomName:    cfg.groom && cfg.groom.name,
     brideName:    cfg.bride && cfg.bride.name,
+    groomFullName: cfg.groom && (cfg.groom.fullName || cfg.groom.name),
+    brideFullName: cfg.bride && (cfg.bride.fullName || cfg.bride.name),
     groomParents: cfg.groom && cfg.groom.parents,
     brideParents: cfg.bride && cfg.bride.parents,
     ceremonyCaps: (cfg.ceremony || "") + " of",
@@ -27,9 +29,14 @@
     year:         cfg.date && cfg.date.year,
     weekday:      cfg.date && cfg.date.weekday,
     time:         cfg.date && cfg.date.time,
+    /* until the exact day is set, the hero and the line under the cards show
+       only what is actually known */
     heroDate:     validDate
       ? pad(eventDate.getDate()) + " · " + pad(eventDate.getMonth() + 1) + " · " + eventDate.getFullYear()
-      : [cfg.date && cfg.date.day, cfg.date && cfg.date.month, cfg.date && cfg.date.year].join(" · "),
+      : [cfg.date && cfg.date.day, cfg.date && cfg.date.month, cfg.date && cfg.date.year]
+          .filter(function (part) { return part && part !== "TBC"; }).join(" · "),
+    dateLine:     [cfg.date && cfg.date.weekday, cfg.date && cfg.date.time]
+                    .filter(Boolean).join(" · "),
     venueName:    cfg.venue && cfg.venue.name,
     venueAddress: cfg.venue && cfg.venue.address,
     invitationLine: cfg.invitationLine,
