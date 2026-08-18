@@ -1,0 +1,43 @@
+name: Deploy invitation to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      # Temporary: lets the site deploy before this branch is merged.
+      # Remove this line once the work is on main.
+      - claude/instagram-reel-review-yvx7gl
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish; queue at most one more.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # The site is plain HTML/CSS/JS at the repository root — nothing to build.
+          path: .
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
