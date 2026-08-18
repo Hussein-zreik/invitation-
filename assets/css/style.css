@@ -80,7 +80,7 @@ body.is-sealed{overflow:hidden;height:100dvh}
    flap apex at 50% / 55.1%, wax seal centred at 50% / 53%          */
 .envelope{
   position:relative;
-  height:min(62svh,32rem);
+  height:min(58svh,30rem);
   aspect-ratio:760/1361;
   width:auto;
   max-width:88vw;
@@ -97,72 +97,63 @@ body.is-sealed{overflow:hidden;height:100dvh}
 .envelope:focus-visible{outline:2px solid var(--gold);outline-offset:1rem;border-radius:.5rem}
 @media (hover:hover){.envelope:hover{transform:translateY(-.4rem)}}
 
-.env-photo,.env-inside,.env-flap-face{
+/* the inside of the envelope, revealed as the panels fold away */
+.env-interior{
   position:absolute;inset:0;
-  background:url("../img/envelope.webp") center/100% 100% no-repeat;
-}
-.env-photo{z-index:1;border-radius:.2rem}
-
-/* the flap: the top panel plus the wax seal, turning as one piece */
-.env-flap{
-  position:absolute;inset:0;
-  z-index:5;
-  transform-origin:top center;
-  transform-style:preserve-3d;
-  transform:rotateX(0deg);
-  transition:transform .95s cubic-bezier(.55,.03,.25,1),
-             z-index 0s linear .48s;
-}
-.envelope.is-opening .env-flap{transform:rotateX(-166deg);z-index:1}
-
-.env-flap-face,.env-flap-back{
-  position:absolute;inset:0;
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-  clip-path:polygon(
-    -2.89% 0.00%, 102.89% 0.00%, 61.29% 43.62%, 64.28% 45.24%, 66.56% 47.19%, 67.98% 49.38%, 68.50% 51.69%, 68.07% 54.01%, 66.73% 56.21%, 64.53% 58.19%, 61.60% 59.85%, 58.08% 61.09%, 54.14% 61.87%, 50.00% 62.13%, 45.86% 61.87%, 41.92% 61.09%, 38.40% 59.85%, 35.47% 58.19%, 33.27% 56.21%, 31.93% 54.01%, 31.50% 51.69%, 32.02% 49.38%, 33.44% 47.19%, 35.72% 45.24%, 38.71% 43.62%
-  );
-}
-.env-flap-face{filter:drop-shadow(0 .3rem .45rem rgba(140,110,60,.16))}
-/* the reverse of the flap: plain paper, shaded towards the fold */
-.env-flap-back{
-  transform:rotateX(180deg);
-  background:linear-gradient(0deg,#ffffff 0%,#fbfaf7 58%,#eceae4 100%);
-  box-shadow:inset 0 -.5rem 1.2rem rgba(150,125,85,.2);
+  z-index:1;
+  border-radius:.2rem;
+  background:linear-gradient(180deg,#e2dfd8 0%,#efede8 34%,#dedbd3 100%);
+  box-shadow:inset 0 .5rem 1.6rem rgba(120,112,95,.45);
 }
 
-/* what the flap was covering: the inside of the envelope */
-.env-inside{
-  z-index:3;
-  background:linear-gradient(180deg,#d9d5cd 0%,#e9e6e0 38%,#d3cfc6 100%);
-  box-shadow:inset 0 .5rem 1.4rem rgba(120,112,95,.4);
-  clip-path:polygon(-2.89% 0%, 102.89% 0%, 50% 55.45%);
-}
-/* what the wax seal was covering: plain envelope paper */
-.env-under-seal{
-  z-index:2;
-  background:radial-gradient(circle at 42% 34%,#fdfcfa 0%,#f5f3ee 55%,#e9e6df 100%);
-  box-shadow:inset 0 0 .8rem rgba(150,140,120,.22);
-  clip-path:ellipse(18.5% 10.33% at 50% 51.8%);
-}
-
-/* the card inside */
+/* the card lying inside */
 .env-letter{
   position:absolute;
-  z-index:0;                 /* tucked inside until it slides out */
-  top:11%;bottom:12%;left:9%;right:9%;
+  z-index:2;
+  top:7%;bottom:7%;left:7%;right:7%;
   border-radius:.25rem;
   background:linear-gradient(180deg,#fffdf9,#fbf6ec);
-  border:1px solid rgba(190,160,120,.4);
-  box-shadow:0 .5rem 1.2rem rgba(120,95,55,.2);
+  border:1px solid rgba(190,160,120,.35);
+  box-shadow:0 .2rem .5rem rgba(120,95,55,.18);
   display:grid;place-items:center;
-  transition:transform .8s cubic-bezier(.2,.8,.3,1) .72s;
+  transition:transform .7s cubic-bezier(.2,.8,.3,1) 1.12s,
+             box-shadow .7s ease 1.12s;
 }
-.envelope.is-opening .env-letter{transform:translateY(-34%);z-index:4}
-.env-letter-inner{display:grid;justify-items:center;gap:.5rem;padding-top:14%}
-.letter-script{font-family:var(--f-script);font-size:clamp(1.5rem,7vw,2rem);color:var(--gold)}
+.envelope.is-opening .env-letter{
+  transform:translateY(-3%) scale(1.03);
+  box-shadow:0 1rem 1.8rem rgba(110,90,55,.28);
+}
+.env-letter-inner{display:grid;justify-items:center;gap:.5rem;padding-top:6%}
+.letter-script{font-family:var(--f-script);font-size:clamp(1.5rem,7.5vw,2.2rem);color:var(--gold)}
 .letter-rule{width:3.5rem;height:1px;background:var(--gold-light)}
 .letter-caps{font-family:var(--f-caps);font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* --- the four panels of the envelope back --- */
+/* each swings out on its own edge and fades as it passes vertical, so the
+   printed face is never seen from behind */
+.env-panel{
+  position:absolute;inset:0;
+  z-index:5;
+  background:url("../img/envelope.webp") center/100% 100% no-repeat;
+  transition:transform 1.15s cubic-bezier(.42,.02,.28,1),
+             opacity .32s ease .86s;
+}
+.envelope.is-opening .env-panel{opacity:0}
+
+.p-top{transform-origin:50% 0%;clip-path:polygon(103.00% 0.00%, -3.00% 0.00%, 38.70% 43.62%, 36.60% 44.68%, 34.62% 46.06%, 33.09% 47.61%, 32.05% 49.29%, 31.55% 51.04%, 31.59% 52.81%, 32.17% 54.56%, 33.28% 56.22%, 34.62% 57.54%, 36.29% 58.74%, 40.10% 60.53%, 44.63% 61.69%, 50.00% 62.13%, 55.37% 61.69%, 59.90% 60.53%, 62.08% 59.62%, 64.01% 58.55%, 65.63% 57.33%, 66.72% 56.22%, 67.83% 54.56%, 68.41% 52.81%, 68.45% 51.04%, 67.95% 49.29%, 66.91% 47.61%, 65.38% 46.06%, 63.40% 44.68%, 61.30% 43.62%)}
+.envelope.is-opening .p-top{transform:rotateX(-102deg)}
+
+.p-left{transition-property:transform,opacity;transform-origin:0% 50%;clip-path:polygon(-3.00% 0.00%, -3.00% 100.00%, 42.97% 61.36%, 38.98% 60.10%, 35.42% 58.16%, 34.13% 57.11%, 32.91% 55.75%, 32.05% 54.31%, 31.64% 53.06%, 31.50% 51.80%, 31.70% 50.28%, 32.17% 49.04%, 32.91% 47.85%, 34.13% 46.49%, 35.42% 45.44%, 38.70% 43.62%);
+  transition-delay:.06s,.9s}
+.envelope.is-opening .p-left{transform:rotateY(102deg)}
+
+.p-right{transition-property:transform,opacity;transform-origin:100% 50%;clip-path:polygon(103.00% 100.00%, 103.00% 0.00%, 61.30% 43.62%, 64.58% 45.44%, 65.87% 46.49%, 67.09% 47.85%, 67.83% 49.04%, 68.36% 50.54%, 68.50% 51.80%, 68.36% 53.06%, 67.83% 54.56%, 67.09% 55.75%, 65.87% 57.11%, 64.58% 58.16%, 61.02% 60.10%, 57.03% 61.36%);
+  transition-delay:.06s,.9s}
+.envelope.is-opening .p-right{transform:rotateY(-102deg)}
+
+.p-bottom{transition-property:transform,opacity;transform-origin:50% 100%;clip-path:polygon(103.00% 100.00%, 57.03% 61.36%, 53.61% 61.93%, 50.00% 62.13%, 46.39% 61.93%, 42.97% 61.36%, -3.00% 100.00%);
+  transition-delay:.12s,.94s}
+.envelope.is-opening .p-bottom{transform:rotateX(102deg)}
 
 /* a quiet ring around the seal, so it reads as the thing to press */
 .seal-ring{

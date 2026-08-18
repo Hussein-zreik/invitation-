@@ -64,9 +64,9 @@
     envelope.classList.add("is-opening");
     scene.classList.add("is-lit");
 
-    // the flap turns (0.95s), then the card rises (0.72s delay + 0.8s), then a
-    // beat before the scene gives way, so nothing is cut off mid-movement
-    var flapDelay = reduceMotion ? 0 : 1820;
+    // the four panels swing open (1.15s, the last starting at 0.12s), then the
+    // card settles (1.12s in, 0.7s long), then a beat before the scene goes
+    var flapDelay = reduceMotion ? 0 : 2150;
     window.setTimeout(function () {
       scene.classList.add("is-open");
       document.body.classList.remove("is-sealed");

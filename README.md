@@ -41,8 +41,7 @@ A few notes:
 - **`venue.mapsUrl`** — paste a Google Maps share link for an exact pin, or delete the
   line and a search link is built from the venue name and address.
 - **The monogram on the seal is part of `assets/img/envelope.webp`**, not text — changing
-  the initials means editing or replacing that image. The flap and seal lift away as one
-  piece, cut to the envelope's own geometry 
+  the initials means editing or replacing that image. The four panels are cut from the envelope's own geometry 
   if you swap in a differently framed photo, those figures in `style.css` need to match it
   (apex 50%/55.45%, seal centred at 50%/51.8% with a radius of 18.5% of the width).
 - **`music`** — optional. Drop an mp3 into `assets/audio/` and set
@@ -72,7 +71,7 @@ then point a `CNAME` DNS record at `<your-username>.github.io`.
 
 | Section  | What happens |
 |----------|--------------|
-| Envelope | The photographed white envelope, with the gold `H&M` monogram already part of the image. The page is locked until the guest taps. The wax seal lifts, the flap folds back, the letter rises, and the scene dissolves into the invitation. |
+| Envelope | The photographed white envelope, with the gold `H&M` monogram already part of the image. The page is locked until the guest taps. All four panels of the envelope back then swing open on their own edges — the seal riding out on the top one — revealing the card lying inside, before the scene dissolves into the invitation. |
 | Hero     | An arch drawn entirely in gold hairlines — the sun setting into the water, hanging lanterns, and the couple as line art. Inline SVG, so it stays sharp on any screen and adds no image weight. |
 | Details  | The formal invitation: Bismillah, both names, both families, and your message. |
 | The Date | Three cards covered by a gold foil layer. Drag across a card to rub it away; it snaps open at roughly a third cleared, and the weekday and time fade in once all three are open. |

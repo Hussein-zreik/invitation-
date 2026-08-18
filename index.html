@@ -57,12 +57,8 @@
   <div class="envelope" id="envelope" role="button" tabindex="0"
        aria-label="Tap to open your invitation">
 
-    <!-- the envelope, photographed -->
-    <div class="env-photo" aria-hidden="true"></div>
-
-    <!-- what the flap and the seal were covering -->
-    <div class="env-under-seal" aria-hidden="true"></div>
-    <div class="env-inside" aria-hidden="true"></div>
+    <!-- the inside of the envelope, and the card lying in it -->
+    <div class="env-interior" aria-hidden="true"></div>
 
     <div class="env-letter" aria-hidden="true">
       <div class="env-letter-inner">
@@ -72,11 +68,11 @@
       </div>
     </div>
 
-    <!-- flap and seal lift away together, showing their plain reverse -->
-    <div class="env-flap" aria-hidden="true">
-      <span class="env-flap-face"></span>
-      <span class="env-flap-back"></span>
-    </div>
+    <!-- the four panels of the envelope back, each folding out on its own edge -->
+    <div class="env-panel p-top" aria-hidden="true"></div>
+    <div class="env-panel p-left" aria-hidden="true"></div>
+    <div class="env-panel p-right" aria-hidden="true"></div>
+    <div class="env-panel p-bottom" aria-hidden="true"></div>
 
     <span class="seal-ring" aria-hidden="true"></span>
   </div>
