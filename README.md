@@ -8,8 +8,9 @@ ready for GitHub Pages.
 ```
 index.html
 assets/css/style.css
-assets/js/config.js   ← the only file you need to edit
+assets/js/config.js       ← the only file you need to edit
 assets/js/app.js
+assets/img/envelope.webp  ← the envelope photograph
 ```
 
 ## 1. Personalise it
@@ -39,6 +40,10 @@ A few notes:
   (e.g. Lebanon `961XXXXXXXX`, Pakistan `92XXXXXXXXXX`). Leave it empty to hide the button.
 - **`venue.mapsUrl`** — paste a Google Maps share link for an exact pin, or delete the
   line and a search link is built from the venue name and address.
+- **The monogram on the seal is part of `assets/img/envelope.webp`**, not text — changing
+  the initials means editing or replacing that image. The flap and seal lift away as one
+  piece, cut to the envelope's own geometry (apex at 50%/55.1%, seal centred at 50%/53%);
+  if you swap in a differently framed photo, those figures in `style.css` need to match it.
 - **`music`** — optional. Drop an mp3 into `assets/audio/` and set
   `music: "assets/audio/your-file.mp3"`. The floating toggle only appears when it's set.
   Browsers block autoplay until the guest interacts, which is why the track starts the
@@ -66,7 +71,7 @@ then point a `CNAME` DNS record at `<your-username>.github.io`.
 
 | Section  | What happens |
 |----------|--------------|
-| Envelope | The page is locked until the guest taps. The wax seal lifts, the flap folds back, the letter rises, and the scene dissolves into the invitation. |
+| Envelope | The photographed envelope, with the `H&M` monogram already part of the image. The page is locked until the guest taps. The wax seal lifts, the flap folds back, the letter rises, and the scene dissolves into the invitation. |
 | Hero     | An arch drawn entirely in gold hairlines — the sun setting into the water, hanging lanterns, and the couple as line art. Inline SVG, so it stays sharp on any screen and adds no image weight. |
 | Details  | The formal invitation: Bismillah, both names, both families, and your message. |
 | The Date | Three cards covered by a gold foil layer. Drag across a card to rub it away; it snaps open at roughly a third cleared, and the weekday and time fade in once all three are open. |

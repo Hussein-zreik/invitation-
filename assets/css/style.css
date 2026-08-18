@@ -76,124 +76,105 @@ body.is-sealed{overflow:hidden;height:100dvh}
 .envelope-scene.is-lit .scene-glow{opacity:1}
 
 /* --- the envelope itself --- */
+/* geometry measured from the photograph:
+   flap apex at 50% / 55.1%, wax seal centred at 50% / 53%          */
 .envelope{
   position:relative;
-  width:min(78vw,20rem);
-  aspect-ratio:300/420;
+  height:min(62svh,32rem);
+  aspect-ratio:760/1361;
+  width:auto;
+  max-width:88vw;
   align-self:center;
-  perspective:1400px;
+  perspective:1500px;
   cursor:pointer;
   border:0;
   background:none;
-  filter:drop-shadow(0 .3rem .5rem rgba(120,95,45,.16)) drop-shadow(0 1.6rem 2.6rem rgba(110,88,42,.3));
+  filter:
+    drop-shadow(0 .3rem .5rem rgba(120,95,45,.18))
+    drop-shadow(0 1.6rem 2.6rem rgba(110,88,42,.32));
   transition:transform .6s cubic-bezier(.2,.8,.3,1);
 }
 .envelope:focus-visible{outline:2px solid var(--gold);outline-offset:1rem;border-radius:.5rem}
 @media (hover:hover){.envelope:hover{transform:translateY(-.4rem)}}
 
-.env-body,.env-flap,.env-letter{position:absolute;inset:0;border-radius:.35rem}
-.env-body svg,.env-flap svg{width:100%;height:100%;display:block}
-
-.env-body{
-  z-index:3;
-  overflow:hidden;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.9),
-    inset 0 -.9rem 1.6rem rgba(168,140,86,.1);
+.env-photo,.env-inside,.env-flap{
+  position:absolute;inset:0;
+  background:url("../img/envelope.webp") center/100% 100% no-repeat;
 }
+.env-photo{z-index:1;border-radius:.2rem}
 
-/* the flap tip, the panel creases and the seal all meet at the same point */
+/* the flap: the top panel plus the wax seal, as one piece */
 .env-flap{
   z-index:5;
-  height:50%;
   transform-origin:top center;
   transform:rotateX(0deg);
-  transition:transform 1.1s cubic-bezier(.6,.02,.2,1),
+  transition:transform 1.15s cubic-bezier(.6,.02,.2,1),
              filter .5s ease,
              z-index 0s linear .55s;
-  clip-path:polygon(0 0,100% 0,50% 100%);
-  filter:drop-shadow(0 .35rem .5rem rgba(150,124,70,.18));
+  filter:drop-shadow(0 .3rem .45rem rgba(140,110,60,.18));
+  clip-path:polygon(
+    -4.30% 0.00%, 104.30% 0.00%, 60.24% 44.71%, 63.34% 46.25%, 65.75% 48.13%,
+    67.33% 50.27%, 67.98% 52.56%, 67.69% 54.87%, 66.45% 57.08%, 64.35% 59.07%,
+    61.49% 60.75%, 58.01% 62.01%, 54.12% 62.79%, 50.00% 63.06%, 45.88% 62.79%,
+    41.99% 62.01%, 38.51% 60.75%, 35.65% 59.07%, 33.55% 57.08%, 32.31% 54.87%,
+    32.02% 52.56%, 32.67% 50.27%, 34.25% 48.13%, 36.66% 46.25%, 39.76% 44.71%
+  );
 }
-.envelope.is-opening .env-flap{transform:rotateX(-172deg);z-index:1;filter:none}
+.envelope.is-opening .env-flap{transform:rotateX(-168deg);z-index:1;filter:none}
 
-.env-letter{
+/* what the flap was covering: the inside of the envelope */
+.env-inside{
+  z-index:3;
+  background:
+    linear-gradient(180deg,#dcc3ae 0%,#e9d3c2 38%,#d9bfa9 100%);
+  box-shadow:inset 0 .5rem 1.4rem rgba(140,102,70,.4);
+  clip-path:polygon(-4.30% 0%, 104.30% 0%, 50% 55.1%);
+}
+/* what the wax seal was covering: plain envelope paper */
+.env-under-seal{
   z-index:2;
-  top:7%;bottom:9%;left:6%;right:6%;
-  background:linear-gradient(180deg,#ffffff,#fbf8f1);
-  border:1px solid var(--line);
-  box-shadow:0 .5rem 1.2rem rgba(120,98,50,.14);
+  background:
+    radial-gradient(circle at 42% 34%,#f7e6da 0%,#f0dbcc 55%,#e6cdbb 100%);
+  box-shadow:inset 0 0 .8rem rgba(170,130,100,.25);
+  clip-path:ellipse(18% 10.06% at 50% 53%);
+}
+
+/* the card inside */
+.env-letter{
+  position:absolute;
+  z-index:0;                 /* tucked inside until it slides out */
+  top:11%;bottom:12%;left:9%;right:9%;
+  border-radius:.25rem;
+  background:linear-gradient(180deg,#fffdf9,#fbf6ec);
+  border:1px solid rgba(190,160,120,.4);
+  box-shadow:0 .5rem 1.2rem rgba(120,95,55,.2);
   display:grid;place-items:center;
-  transition:transform 1s cubic-bezier(.2,.8,.3,1) .5s;
+  transition:transform 1s cubic-bezier(.2,.8,.3,1) .55s;
 }
-.envelope.is-opening .env-letter{transform:translateY(-46%);z-index:4}
-.env-letter-inner{display:grid;justify-items:center;gap:.5rem;padding-top:10%}
-.letter-script{font-family:var(--f-script);font-size:2rem;color:var(--gold)}
+.envelope.is-opening .env-letter{transform:translateY(-36%);z-index:4}
+.env-letter-inner{display:grid;justify-items:center;gap:.5rem;padding-top:14%}
+.letter-script{font-family:var(--f-script);font-size:clamp(1.5rem,7vw,2rem);color:var(--gold)}
 .letter-rule{width:3.5rem;height:1px;background:var(--gold-light)}
-.letter-caps{font-family:var(--f-caps);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft)}
+.letter-caps{font-family:var(--f-caps);font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-soft)}
 
-/* embossed floral relief */
-.env-emboss{position:absolute;inset:0;width:100%;height:100%}
-/* tone-on-tone relief: a light top edge + a soft shadow beneath */
-.emb{
-  fill:#ffffff;
-  color:#ffffff;
-  opacity:.95;
-  filter:
-    drop-shadow(0 1px 0 rgba(255,255,255,1))
-    drop-shadow(0 -1px 1.6px rgba(170,150,110,.4));
-}
-
-/* wax seal: a flat disc of wax with a slightly uneven rim, struck once */
-.wax-seal{
+/* a quiet ring around the seal, so it reads as the thing to press */
+.seal-ring{
   position:absolute;
   z-index:6;
-  left:50%;top:50%;
+  left:50%;top:53%;
+  width:38%;aspect-ratio:1;
   translate:-50% -50%;
-  width:29%;aspect-ratio:1;
-  display:grid;place-items:center;
-  /* an organic rim, the way wax spreads under a stamp */
-  border-radius:49% 51% 48% 52% / 52% 48% 52% 48%;
-  background:
-    linear-gradient(158deg,#c6a153 0%,#b8933f 40%,#ab8433 72%,#b6913e 100%);
-  background-color:#b08d3f;
-  box-shadow:
-    0 .3rem .5rem rgba(105,80,28,.3),
-    inset 0 .1rem .2rem rgba(255,246,214,.35),
-    inset 0 -.12rem .3rem rgba(84,63,18,.3);
-  transition:transform .5s ease,opacity .5s ease;
-}
-/* the ring the stamp's edge presses into the wax */
-.wax-seal::before{
-  content:"";position:absolute;inset:13%;
-  border-radius:inherit;
-  box-shadow:
-    inset 0 .06rem .1rem rgba(84,63,18,.45),
-    inset 0 -.06rem .1rem rgba(255,246,214,.3);
-}
-/* a quiet ring that opens outward, so the seal reads as the thing to press */
-.wax-seal::after{
-  content:"";position:absolute;inset:0;border-radius:inherit;
-  border:1px solid rgba(176,141,63,.45);
+  border-radius:50%;
+  border:1px solid rgba(176,141,63,.5);
+  pointer-events:none;
   animation:sealRing 3.6s ease-out infinite;
 }
 @keyframes sealRing{
-  0%   {transform:scale(1);opacity:.55}
-  70%  {transform:scale(1.42);opacity:0}
-  100% {transform:scale(1.42);opacity:0}
+  0%   {transform:scale(.92);opacity:.6}
+  70%  {transform:scale(1.3);opacity:0}
+  100% {transform:scale(1.3);opacity:0}
 }
-.envelope.is-opening .wax-seal::after{animation:none;opacity:0}
-
-.wax-seal-text{
-  position:relative;
-  font-family:var(--f-script);
-  font-size:clamp(1.15rem,5.8vw,1.7rem);
-  /* struck into the wax: dark above the stroke, a lit edge below it */
-  color:#8a6a26;
-  text-shadow:
-    0 1px 0 rgba(255,246,214,.55),
-    0 -1px 1px rgba(76,57,16,.5);
-}
-.envelope.is-opening .wax-seal{transform:translate(-50%,-50%) scale(.42) rotate(-22deg);opacity:0}
+.envelope.is-opening .seal-ring{animation:none;opacity:0}
 
 .open-hint{
   margin:0;
