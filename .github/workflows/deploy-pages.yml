@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-      # Temporary: lets the site deploy before this branch is merged.
-      # Remove this line once the work is on main.
-      - claude/instagram-reel-review-yvx7gl
   workflow_dispatch:
 
 permissions:
