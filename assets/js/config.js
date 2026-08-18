@@ -14,6 +14,7 @@ window.INVITE = {
     fullName: "Maha Maatouk",
     parents: "Mr & Mrs Maatouk"
   },
+  arabicNames: "حسين و مها",          // shown under the English, in the hero
   monogram: "H&M",          // shown on the wax seal
   ceremony: "Engagement",          // used in the invitation heading
   welcomeLine: "Welcome to our Engagement",   // shown on the opening screen

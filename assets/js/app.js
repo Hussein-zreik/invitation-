@@ -16,6 +16,7 @@
 
   var values = {
     monogram:     cfg.monogram,
+    arabicNames:  cfg.arabicNames,
     welcomeLine:  cfg.welcomeLine,
     groomName:    cfg.groom && cfg.groom.name,
     brideName:    cfg.bride && cfg.bride.name,

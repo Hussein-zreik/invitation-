@@ -211,9 +211,37 @@ body::after{
 .invite.is-visible{opacity:1}
 
 .panel{
+  position:relative;
   padding:4.5rem 1.25rem;
   display:grid;
   justify-items:center;
+}
+/* a gold thread running the length of the page, behind the sheets, with a
+   small ornament sitting on it at every seam */
+.panel::before{
+  content:"";
+  position:absolute;
+  left:50%;top:0;bottom:0;
+  width:1px;
+  transform:translateX(-50%);
+  background:rgba(176,141,63,.3);
+  z-index:0;
+}
+.panel::after{
+  content:"✦";
+  position:absolute;
+  left:50%;top:0;
+  transform:translate(-50%,-50%);
+  font-size:.7rem;
+  line-height:1;
+  color:var(--gold);
+  z-index:2;
+}
+.panel > *{position:relative;z-index:1}
+/* the thread fades in where it begins, and ends on the closing ornament */
+#details::before{
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 16%);
+  mask-image:linear-gradient(180deg,transparent 0,#000 16%);
 }
 .panel--date{gap:.35rem}
 
@@ -265,6 +293,13 @@ body::after{
 }
 .amp{font-family:var(--f-serif);font-style:italic;font-size:.5em;color:var(--gold);line-height:1}
 .music-toggle svg{fill:var(--gold)}
+.arabic-names{
+  margin:.35rem 0 .1rem;
+  font-family:var(--f-arabic);
+  font-size:clamp(1.25rem,5.8vw,1.7rem);
+  line-height:1.5;
+  color:var(--gold-deep);
+}
 .hero-date{
   margin:.1rem 0 0;
   font-family:var(--f-caps);
@@ -446,11 +481,18 @@ body::after{
 
 /* ---- closing ---- */
 .closing{
+  position:relative;
   padding:4rem 1.5rem 5.5rem;
   text-align:center;
   display:grid;justify-items:center;gap:.5rem;
-  border-top:1px solid rgba(184,170,142,.3);
-  box-shadow:inset 0 1px 0 #ffffff;
+}
+.closing::before{
+  content:"❧";
+  position:absolute;
+  left:50%;top:0;
+  transform:translate(-50%,-50%);
+  font-size:.8rem;line-height:1;
+  color:var(--gold);
 }
 .dua{margin:0;max-width:30rem;font-style:italic;color:var(--ink-soft)}
 .dua-ref{margin:0;font-family:var(--f-caps);font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
