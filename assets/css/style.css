@@ -494,6 +494,9 @@ body::after{
   font-size:.8rem;line-height:1;
   color:var(--gold);
 }
+.dua-ar{margin:0 0 1.1rem;max-width:32rem;font-family:var(--f-arabic);font-size:clamp(1.05rem,4.4vw,1.3rem);line-height:2.15;color:var(--gold-deep)}
+.dua-ar+.dua{position:relative;padding-top:1.1rem}
+.dua-ar+.dua::before{content:"";position:absolute;left:50%;top:0;width:2.4rem;height:1px;transform:translateX(-50%);background:var(--line)}
 .dua{margin:0;max-width:30rem;font-style:italic;color:var(--ink-soft)}
 .dua-ref{margin:0;font-family:var(--f-caps);font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
 .signoff{margin:1.6rem 0 0;font-family:var(--f-script);font-size:2rem;color:var(--gold-deep)}

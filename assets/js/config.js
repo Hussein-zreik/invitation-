@@ -44,6 +44,8 @@ window.INVITE = {
 
   /* --- Words --- */
   invitationLine: "Join us for an evening of love, laughter, duas, and unforgettable memories as we begin our forever.",
+  closingDuaArabic:
+    "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ",
   closingDua:
     "“And among His signs is that He created for you mates from among yourselves, that you may dwell in tranquillity with them, and He has put love and mercy between your hearts.”",
   closingDuaRef: "Surah Ar-Rum · 30:21",

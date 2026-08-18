@@ -41,6 +41,7 @@
     venueName:    cfg.venue && cfg.venue.name,
     venueAddress: cfg.venue && cfg.venue.address,
     invitationLine: cfg.invitationLine,
+    closingDuaArabic: cfg.closingDuaArabic,
     closingDua:   cfg.closingDua,
     closingDuaRef: cfg.closingDuaRef,
     rsvpBy:       cfg.rsvp && cfg.rsvp.byDate
