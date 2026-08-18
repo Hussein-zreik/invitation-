@@ -59,26 +59,72 @@
 
     <div class="env-letter" aria-hidden="true">
       <div class="env-letter-inner">
-        <span class="letter-script">You're invited</span>
+        <span class="letter-script">You&rsquo;re invited</span>
         <span class="letter-rule"></span>
         <span class="letter-caps">to our engagement</span>
       </div>
     </div>
 
+    <!-- the back of the envelope: four panels folded to a single centre point -->
     <div class="env-body" aria-hidden="true">
-      <svg class="env-emboss" viewBox="0 0 300 420" preserveAspectRatio="xMidYMid slice">
-        <use href="#floral-spray" class="emb" transform="translate(150,368) scale(1.25)"/>
-        <use href="#vine" class="emb" transform="translate(34,150) rotate(64) scale(.7)"/>
-        <use href="#vine" class="emb" transform="translate(266,150) scale(-1,1) rotate(64) scale(.7)"/>
+      <svg viewBox="0 0 300 420" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="panelL" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#f6f2e9"/><stop offset="100%" stop-color="#fffefb"/>
+          </linearGradient>
+          <linearGradient id="panelR" x1="1" y1="0" x2="0" y2="0">
+            <stop offset="0%" stop-color="#f3efe4"/><stop offset="100%" stop-color="#fdfbf6"/>
+          </linearGradient>
+          <linearGradient id="panelB" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#fffefc"/><stop offset="100%" stop-color="#f5f1e7"/>
+          </linearGradient>
+          <filter id="grain">
+            <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" result="n"/>
+            <feColorMatrix in="n" type="saturate" values="0"/>
+          </filter>
+        </defs>
+
+        <rect x="0" y="0" width="300" height="420" fill="#ffffff"/>
+
+        <!-- side panels, then the bottom panel folded over them -->
+        <path d="M0,0 L150,210 L0,420 Z"     fill="url(#panelL)"/>
+        <path d="M300,0 L150,210 L300,420 Z" fill="url(#panelR)"/>
+        <path d="M0,420 L150,210 L300,420 Z" fill="url(#panelB)"/>
+
+        <!-- creases: a soft shadow with a lit edge alongside, the way folded paper sits -->
+        <g fill="none" stroke-linecap="round">
+          <path d="M0,0 L150,210"     stroke="rgba(150,128,86,.16)" stroke-width="1.2"/>
+          <path d="M300,0 L150,210"   stroke="rgba(150,128,86,.16)" stroke-width="1.2"/>
+          <path d="M0,420 L150,210"   stroke="rgba(150,128,86,.2)"  stroke-width="1.4"/>
+          <path d="M300,420 L150,210" stroke="rgba(150,128,86,.2)"  stroke-width="1.4"/>
+          <path d="M1,421 L150,211"   stroke="rgba(255,255,255,.9)" stroke-width="1"/>
+          <path d="M299,421 L150,211" stroke="rgba(255,255,255,.9)" stroke-width="1"/>
+        </g>
+
+        <!-- gold keyline, inset like a printed border -->
+        <rect x="15" y="15" width="270" height="390" rx="3"
+              fill="none" stroke="#b08d3f" stroke-width=".8" opacity=".3"/>
+
+        <use href="#floral-spray" class="emb" transform="translate(150,388) scale(.95)"/>
+
+        <rect x="0" y="0" width="300" height="420" filter="url(#grain)" opacity=".045"/>
       </svg>
-      <span class="env-fold env-fold--l"></span>
-      <span class="env-fold env-fold--r"></span>
-      <span class="env-fold env-fold--b"></span>
     </div>
 
+    <!-- the top flap, folded down over everything -->
     <div class="env-flap" aria-hidden="true">
-      <svg class="env-emboss" viewBox="0 0 300 190" preserveAspectRatio="xMidYMax slice">
-        <use href="#floral-spray" class="emb" transform="translate(150,172) scale(1.05)"/>
+      <svg viewBox="0 0 300 210" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="panelT" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="72%"  stop-color="#fdfbf6"/>
+            <stop offset="100%" stop-color="#f2eee3"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="300" height="210" fill="url(#panelT)"/>
+        <use href="#vine" class="emb" transform="translate(150,120) scale(.62)"/>
+        <use href="#vine" class="emb" transform="translate(150,120) scale(-.62,.62)"/>
+        <rect x="0" y="0" width="300" height="210" filter="url(#grain)" opacity=".045"/>
       </svg>
     </div>
 
