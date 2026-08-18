@@ -4,9 +4,12 @@
    ============================================================ */
 
 :root{
-  --white:#ffffff;
-  --surface:#faf8f4;
-  --surface-2:#f4efe4;
+  --paper:#f4f3f0;        /* the ground: the same stock as the envelope */
+  --paper-edge:#e7e5e0;   /* where the light falls away at the edges */
+  --sheet:#fdfdfb;        /* a card lying on that ground */
+  --white:#fdfdfb;
+  --surface:#f8f7f4;
+  --surface-2:#f1efe9;
   --champagne:#e8d5a9;
   --gold:#b08d3f;
   --gold-deep:#8c6d2a;
@@ -14,7 +17,8 @@
   --ink:#2e2a24;
   --ink-soft:#6b6157;
   --line:rgba(176,141,63,.34);
-  --shadow:rgba(90,72,40,.13);
+  --shadow:rgba(96,88,70,.14);
+  --press:rgba(120,110,88,.35);   /* the shaded side of a pressed line */
 
   --f-serif:"Playfair Display",Georgia,serif;
   --f-caps:"Cinzel",Georgia,serif;
@@ -35,14 +39,29 @@ body{
   margin:0;
   font-family:var(--f-serif);
   color:var(--ink);
-  background:radial-gradient(120% 70% at 50% 0%,#fffdf7 0%,var(--white) 55%) fixed;
-  background-color:var(--white);
+  background:
+    radial-gradient(120% 80% at 50% -10%,#fdfdfb 0%,var(--paper) 46%,var(--paper-edge) 100%) fixed;
+  background-color:var(--paper);
   line-height:1.66;
   overflow-x:hidden;
 }
 body.is-sealed{overflow:hidden;height:100dvh}
 
 .svg-defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* the tooth of the paper: sits above the page, below the envelope scene */
+body::after{
+  content:"";
+  position:fixed;inset:0;
+  z-index:40;
+  pointer-events:none;
+  opacity:.05;
+  mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27180%27%20height%3D%27180%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.9%27%20numOctaves%3D%274%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27180%27%20height%3D%27180%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E");
+  background-size:180px 180px;
+}
+@media (prefers-reduced-motion:no-preference){}
+.invite{position:relative;z-index:1}
 
 /* ============ 1. ENVELOPE SCENE ============ */
 .envelope-scene{
@@ -268,10 +287,14 @@ body.is-sealed{overflow:hidden;height:100dvh}
   width:100%;max-width:var(--maxw);
   padding:3.2rem 1.75rem 3rem;
   text-align:center;
-  background:linear-gradient(180deg,var(--white),var(--surface));
-  border:1px solid var(--line);
+  background:linear-gradient(180deg,var(--sheet),var(--surface));
+  border:1px solid rgba(184,170,142,.22);
   border-radius:1rem;
-  box-shadow:0 1rem 2.4rem var(--shadow);
+  box-shadow:
+    0 1px 1px rgba(96,88,70,.06),
+    0 .35rem .9rem rgba(96,88,70,.07),
+    0 1.4rem 3rem var(--shadow),
+    inset 0 1px 0 #ffffff;
   display:grid;justify-items:center;gap:.35rem;
 }
 .card--arch{
@@ -317,13 +340,14 @@ body.is-sealed{overflow:hidden;height:100dvh}
   font-size:1.02rem;font-style:italic;color:var(--ink-soft);
 }
 .divider{
-  width:4.5rem;height:1px;margin:.35rem 0;
+  width:4.5rem;height:2px;margin:.35rem 0;
   background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  box-shadow:0 1px 0 rgba(255,255,255,.9);
   position:relative;
 }
 .divider::after{
   content:"❧";position:absolute;left:50%;top:50%;translate:-50% -50%;
-  font-size:.6rem;color:var(--gold);background:var(--white);padding:0 .35rem;
+  font-size:.6rem;color:var(--gold);background:var(--sheet);padding:0 .35rem;
 }
 .glyph{color:var(--gold);font-size:.8rem;letter-spacing:.4em}
 
@@ -347,8 +371,11 @@ body.is-sealed{overflow:hidden;height:100dvh}
   aspect-ratio:1/1.06;
   border-radius:.85rem;
   border:1px solid var(--line);
-  background:linear-gradient(180deg,var(--white),var(--surface));
-  box-shadow:0 .6rem 1.2rem var(--shadow);
+  background:linear-gradient(180deg,var(--sheet),var(--surface));
+  box-shadow:
+    0 1px 1px rgba(96,88,70,.06),
+    0 .5rem 1.1rem var(--shadow),
+    inset 0 1px 0 #ffffff;
   display:grid;place-items:center;
   overflow:hidden;
   touch-action:none;
@@ -390,9 +417,10 @@ body.is-sealed{overflow:hidden;height:100dvh}
 }
 .cd-unit{
   padding:.7rem .25rem;
-  border:1px solid var(--line);
+  border:1px solid rgba(184,170,142,.24);
   border-radius:.6rem;
-  background:var(--white);
+  background:var(--sheet);
+  box-shadow:0 1px 1px rgba(96,88,70,.05),inset 0 1px 0 #ffffff;
   display:grid;gap:.15rem;
 }
 .cd-unit b{font-family:var(--f-caps);font-size:1.15rem;font-weight:500;color:var(--gold-deep);font-variant-numeric:tabular-nums}
@@ -410,7 +438,7 @@ body.is-sealed{overflow:hidden;height:100dvh}
   transition:transform .2s ease,box-shadow .2s ease;
 }
 .btn--ghost{
-  background:var(--white);color:var(--gold-deep);
+  background:var(--sheet);color:var(--gold-deep);
   border-color:var(--line);box-shadow:none;
 }
 .btn:active{transform:translateY(1px)}
@@ -421,7 +449,8 @@ body.is-sealed{overflow:hidden;height:100dvh}
   padding:4rem 1.5rem 5.5rem;
   text-align:center;
   display:grid;justify-items:center;gap:.5rem;
-  border-top:1px solid var(--line);
+  border-top:1px solid rgba(184,170,142,.3);
+  box-shadow:inset 0 1px 0 #ffffff;
 }
 .dua{margin:0;max-width:30rem;font-style:italic;color:var(--ink-soft)}
 .dua-ref{margin:0;font-family:var(--f-caps);font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
@@ -432,9 +461,9 @@ body.is-sealed{overflow:hidden;height:100dvh}
   position:fixed;right:1rem;bottom:1rem;z-index:40;
   width:2.75rem;height:2.75rem;border-radius:50%;
   display:grid;place-items:center;cursor:pointer;
-  border:1px solid var(--line);
-  background:var(--white);
-  box-shadow:0 .4rem .9rem var(--shadow);
+  border:1px solid rgba(184,170,142,.3);
+  background:var(--sheet);
+  box-shadow:0 .4rem .9rem var(--shadow),inset 0 1px 0 #ffffff;
 }
 .music-toggle svg{width:1.05rem;fill:var(--gold)}
 .music-toggle[aria-pressed="false"] svg{opacity:.4}
