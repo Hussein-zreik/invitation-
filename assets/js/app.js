@@ -298,9 +298,11 @@
     }
   }
 
+  /* The calendar file needs a real start time, not just a date, so the
+     button stays hidden until `date.time` is filled in.                  */
   var icsBtn = document.getElementById("icsBtn");
   if (icsBtn) {
-    if (!validDate) {
+    if (!validDate || !(cfg.date && cfg.date.time)) {
       icsBtn.hidden = true;
     } else {
       icsBtn.addEventListener("click", function () {

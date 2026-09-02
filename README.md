@@ -25,8 +25,9 @@ window.INVITE = {
   monogram: "H&M",              // the letters on the wax seal (part of the image)
   ceremony: "Engagement",
   welcomeLine: "Welcome to our Engagement",
-  date: { day: "TBC", month: "September", year: "2026",
-          iso: "" },                      // fill in to switch the countdown on
+  date: { day: "03", month: "October", year: "2026", weekday: "Saturday",
+          time: "",                       // fill in to switch the calendar file on
+          iso: "2026-10-03T00:00:00" },   // drives the countdown
   ...
 };
 ```
@@ -35,11 +36,15 @@ A few notes:
 
 - **`name` is the short name** shown large in script; **`fullName`** is what appears on
   the invitation itself. Leave `fullName` out and the short name is used for both.
-- **`date.iso`** must be in `YYYY-MM-DDTHH:MM:SS` form. It powers the live countdown and
-  the "Add to calendar" (`.ics`) download — while it is empty **both hide themselves**,
-  so nothing counts down to a date that is not fixed yet. The three scratch cards use the
-  separate `day` / `month` / `year` strings, so you can write them however you like; a
-  `day` of `"TBC"` is left out of the line under the couple's names.
+- **`date.iso`** must be in `YYYY-MM-DDTHH:MM:SS` form (venue local time). It powers the
+  live countdown, and while it is empty the countdown hides itself, so nothing counts down
+  to a date that is not fixed yet. It is currently set to the *start* of 3 October 2026 —
+  once the hour is known, put the real start time in `iso` and in `date.time`.
+- **The "Add to calendar" (`.ics`) button** needs an actual start time, so it stays hidden
+  until `date.time` is filled in. A calendar entry at midnight would be worse than none.
+- The three scratch cards use the separate `day` / `month` / `year` strings, so you can
+  write them however you like; a `day` of `"TBC"` is left out of the line under the
+  couple's names.
 - **`date.weekday` and `date.time`** join into the line under the cards, and that line
   disappears entirely when both are empty.
 - **`rsvp.whatsapp`** is an international number with digits only — no `+`, no spaces

@@ -23,15 +23,16 @@ window.INVITE = {
      `iso` drives the countdown and the "Add to calendar" file.
      Format: YYYY-MM-DDTHH:MM:SS  (local time of the venue)      */
   date: {
-    day: "TBC",                       // the day of the month, once it is set
-    month: "September",
+    day: "03",                        // the day of the month
+    month: "October",
     year: "2026",
-    weekday: "",                      // e.g. "Saturday" — leave empty if unknown
-    time: "",                         // e.g. "7:00 PM onwards"
-    /* Fill `iso` in once the day is fixed (YYYY-MM-DDTHH:MM:SS) and the
-       countdown and the "Add to calendar" button appear on their own.
-       While it is empty, both stay hidden.                              */
-    iso: "",
+    weekday: "Saturday",              // leave empty if unknown
+    time: "",                         // e.g. "7:00 PM onwards" — the "Add to
+                                      //   calendar" button appears once this is set
+    /* `iso` drives the countdown (YYYY-MM-DDTHH:MM:SS, venue local time).
+       It is set to the start of the day; put the real start time in here
+       together with `time` above once the hour is fixed.                 */
+    iso: "2026-10-03T00:00:00",
     durationHours: 5
   },
 
