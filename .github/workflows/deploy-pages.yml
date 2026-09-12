@@ -29,6 +29,12 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      # Browsers cache CSS/JS hard, so an edit to the couple's details can
+      # keep showing the old text to anyone who has opened the page before.
+      # Stamping the commit onto the asset URLs makes each deploy a new URL.
+      - name: Stamp the build onto the asset URLs
+        run: sed -i "s/__BUILD__/${GITHUB_SHA::7}/g" index.html
+
       - name: Upload the site
         uses: actions/upload-pages-artifact@v3
         with:
