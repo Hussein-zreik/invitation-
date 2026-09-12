@@ -60,7 +60,7 @@ window.INVITE = {
   rsvp: {
     whatsapp: "",
     message: "Assalamu Alaikum! I received your invitation — I would love to attend the engagement of Hussein & Maha.",
-    byDate: "1 August 2026"
+    byDate: "20 September 2026"
   },
 
   /* --- Optional background music ---
