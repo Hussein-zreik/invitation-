@@ -51,9 +51,12 @@ A few notes:
   (e.g. Lebanon `961XXXXXXXX`). While it is **empty the button just opens the WhatsApp
   app** — no chat, no recipient, nothing pre-typed. Fill the number in and the button
   opens that conversation instead, carrying `rsvp.message` if one is set.
-- **`venue.mapsUrl`** can be a shared Google Maps link (`maps.app.goo.gl/…`), which drops
-  the guest on the exact pin. Leave it out and the button falls back to a map search for
-  the venue name and address.
+- **`venue.coords`** is the reliable way to point at the venue: `"latitude,longitude"`
+  taken off the map pin. The button uses it in preference to everything else, through
+  Google's official Maps URL format, so it opens the Maps app on a phone and cannot
+  expire. **`venue.mapsUrl`** (a shared `maps.app.goo.gl/…` link) is the fallback, and a
+  search for the venue name and address is the last resort. Shortened links are worth
+  avoiding — they depend on a redirect service that can and does reject them.
 - **Any bound field set to `""` hides its element**, so a detail you do not know yet
   leaves no placeholder on the page. Leaving a field out of the config entirely keeps
   whatever the HTML already says.

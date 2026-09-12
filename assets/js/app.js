@@ -286,11 +286,21 @@
   }
 
   /* ---------------- 5. maps, calendar, RSVP ---------------- */
+  /* Coordinates first: they go through Google's official Maps URL format,
+     which opens the app on a phone and never depends on a short link that
+     can expire. `mapsUrl` is the fallback, then a plain name search.      */
   var mapsBtn = document.getElementById("mapsBtn");
   if (mapsBtn) {
-    var mapsUrl = (cfg.venue && cfg.venue.mapsUrl) ||
-      ("https://maps.google.com/?q=" + encodeURIComponent([cfg.venue && cfg.venue.name, cfg.venue && cfg.venue.address].filter(Boolean).join(" ")));
-    mapsBtn.href = mapsUrl;
+    var v = cfg.venue || {};
+    var coords = (v.coords || "").replace(/\s+/g, "");
+    if (coords) {
+      mapsBtn.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(coords);
+    } else if (v.mapsUrl) {
+      mapsBtn.href = v.mapsUrl;
+    } else {
+      mapsBtn.href = "https://www.google.com/maps/search/?api=1&query=" +
+        encodeURIComponent([v.name, v.address].filter(Boolean).join(" "));
+    }
   }
 
   /* With no number set, the button simply opens WhatsApp — no chat, no

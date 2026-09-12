@@ -41,6 +41,10 @@ window.INVITE = {
     name: "Maatouk Restaurant",
     address: "",                      // set to "" — the line is hidden until
                                       //   the street address is known
+    /* Preferred: "latitude,longitude" straight off the map pin. This is what
+       the button uses when it is set — it opens the Maps app on a phone and
+       cannot expire the way a shortened link can.                          */
+    coords: "",
     mapsUrl: "https://maps.app.goo.gl/wttgzM85Fj6KrSnF7"
   },
 
