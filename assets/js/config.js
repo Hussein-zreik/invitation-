@@ -44,8 +44,8 @@ window.INVITE = {
     /* Preferred: "latitude,longitude" straight off the map pin. This is what
        the button uses when it is set — it opens the Maps app on a phone and
        cannot expire the way a shortened link can.                          */
-    coords: "",
-    mapsUrl: "https://maps.app.goo.gl/wttgzM85Fj6KrSnF7"
+    coords: "33.198917,35.201694",   // 33°11'56.1"N 35°12'06.1"E
+    mapsUrl: ""
   },
 
   /* --- Words --- */
