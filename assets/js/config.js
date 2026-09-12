@@ -38,9 +38,10 @@ window.INVITE = {
 
   /* --- Where --- */
   venue: {
-    name: "Noor Banquet Hall",
-    address: "12 Rose Garden Avenue, Lahore",
-    mapsUrl: "https://maps.google.com/?q=Noor+Banquet+Hall+Lahore"
+    name: "Maatouk Restaurant",
+    address: "",                      // set to "" — the line is hidden until
+                                      //   the street address is known
+    mapsUrl: "https://maps.app.goo.gl/wttgzM85Fj6KrSnF7"
   },
 
   /* --- Words --- */
@@ -52,9 +53,12 @@ window.INVITE = {
   closingDuaRef: "Surah Ar-Rum · 30:21",
 
   /* --- RSVP ---
-     Phone in international format, digits only (no + or spaces).  */
+     While `whatsapp` is empty the button just opens the WhatsApp app, with
+     no chat and nobody to reply to. Put a number in — international format,
+     digits only, no + or spaces (Lebanon: 961XXXXXXXX) — and it opens that
+     conversation instead, with `message` pre-typed if one is set.         */
   rsvp: {
-    whatsapp: "923001234567",
+    whatsapp: "",
     message: "Assalamu Alaikum! I received your invitation — I would love to attend the engagement of Hussein & Maha.",
     byDate: "1 August 2026"
   },

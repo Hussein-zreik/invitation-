@@ -47,10 +47,15 @@
     rsvpBy:       cfg.rsvp && cfg.rsvp.byDate
   };
 
+  /* A value left out of the config (null/undefined) keeps whatever the HTML
+     already says; a value set to "" removes the element, so a detail that is
+     not known yet leaves no placeholder behind.                            */
   Object.keys(values).forEach(function (key) {
     var text = values[key];
-    if (text == null || text === "") return;
+    if (text == null) return;
     document.querySelectorAll('[data-bind="' + key + '"]').forEach(function (el) {
+      if (text === "") { el.hidden = true; return; }
+      el.hidden = false;
       el.textContent = text;
     });
   });
@@ -288,13 +293,19 @@
     mapsBtn.href = mapsUrl;
   }
 
+  /* With no number set, the button simply opens WhatsApp — no chat, no
+     recipient, nothing pre-typed. Put a number in `rsvp.whatsapp` and it
+     opens that conversation instead.                                     */
   var waBtn = document.getElementById("waBtn");
   if (waBtn) {
     var phone = (cfg.rsvp && cfg.rsvp.whatsapp || "").replace(/\D/g, "");
     if (phone) {
-      waBtn.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(cfg.rsvp.message || "");
+      waBtn.href = "https://wa.me/" + phone +
+        (cfg.rsvp.message ? "?text=" + encodeURIComponent(cfg.rsvp.message) : "");
     } else {
-      waBtn.hidden = true;
+      waBtn.href = "whatsapp://";
+      waBtn.removeAttribute("target");
+      waBtn.removeAttribute("rel");
     }
   }
 

@@ -48,7 +48,15 @@ A few notes:
 - **`date.weekday` and `date.time`** join into the line under the cards, and that line
   disappears entirely when both are empty.
 - **`rsvp.whatsapp`** is an international number with digits only — no `+`, no spaces
-  (e.g. Lebanon `961XXXXXXXX`, Pakistan `92XXXXXXXXXX`). Leave it empty to hide the button.
+  (e.g. Lebanon `961XXXXXXXX`). While it is **empty the button just opens the WhatsApp
+  app** — no chat, no recipient, nothing pre-typed. Fill the number in and the button
+  opens that conversation instead, carrying `rsvp.message` if one is set.
+- **`venue.mapsUrl`** can be a shared Google Maps link (`maps.app.goo.gl/…`), which drops
+  the guest on the exact pin. Leave it out and the button falls back to a map search for
+  the venue name and address.
+- **Any bound field set to `""` hides its element**, so a detail you do not know yet
+  leaves no placeholder on the page. Leaving a field out of the config entirely keeps
+  whatever the HTML already says.
 - **`venue.mapsUrl`** — paste a Google Maps share link for an exact pin, or delete the
   line and a search link is built from the venue name and address.
 - **The monogram on the seal is part of `assets/img/envelope.webp`**, not text — changing
