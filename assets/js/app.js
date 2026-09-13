@@ -389,4 +389,88 @@
        .catch(function () { musicBtn.setAttribute("aria-pressed", "false"); });
     }
   }
+
+  /* ---------------- 7. ambient gold ----------------
+     Motes of gold leaf drifting slowly upward, over the whole viewport.
+     The layer is fixed and never toggles, so the envelope screen and the
+     scrolled invitation sit in the same air.                             */
+  (function ambientGold() {
+    var canvas = document.getElementById("ambient");
+    if (!canvas || reduceMotion || !canvas.getContext) return;
+
+    var ctx = canvas.getContext("2d");
+    var motes = [];
+    var w = 0, h = 0;
+    var running = true;
+
+    function size() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = canvas.clientWidth;
+      h = canvas.clientHeight;
+      canvas.width  = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      seed();
+    }
+
+    /* density follows the area, so a phone is not as busy as a laptop */
+    function seed() {
+      var count = Math.round(Math.min(44, Math.max(14, (w * h) / 27000)));
+      motes = [];
+      for (var i = 0; i < count; i++) motes.push(mote(true));
+    }
+
+    function mote(anywhere) {
+      return {
+        x: Math.random() * w,
+        y: anywhere ? Math.random() * h : h + 12,
+        r: 0.6 + Math.random() * 1.6,
+        vy: -(0.07 + Math.random() * 0.2),
+        drift: (Math.random() - 0.5) * 0.14,
+        phase: Math.random() * Math.PI * 2,
+        spin: 0.004 + Math.random() * 0.011,
+        alpha: 0.16 + Math.random() * 0.36
+      };
+    }
+
+    function frame() {
+      if (!running) return;
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < motes.length; i++) {
+        var m = motes[i];
+        m.y += m.vy;
+        m.phase += m.spin;
+        m.x += m.drift + Math.sin(m.phase) * 0.2;
+        if (m.y < -14 || m.x < -14 || m.x > w + 14) { motes[i] = mote(false); continue; }
+
+        /* each mote breathes a little, the way leaf catches the light */
+        var a = m.alpha * (0.55 + 0.45 * Math.sin(m.phase * 1.7));
+        var rr = m.r * 3.2;
+        var g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, rr);
+        g.addColorStop(0,   "rgba(226,200,135," + a + ")");
+        g.addColorStop(0.45,"rgba(176,141,63,"  + (a * 0.5) + ")");
+        g.addColorStop(1,   "rgba(176,141,63,0)");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, rr, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      window.requestAnimationFrame(frame);
+    }
+
+    window.addEventListener("resize", size);
+
+    /* a background tab should not burn the battery */
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        running = false;
+      } else if (!running) {
+        running = true;
+        window.requestAnimationFrame(frame);
+      }
+    });
+
+    size();
+    window.requestAnimationFrame(frame);
+  })();
 })();

@@ -533,3 +533,19 @@ body::after{
   .card{padding:4rem 3rem 3.5rem}
   .scratch-row{gap:1rem}
 }
+
+/* ============ AMBIENT GOLD ============
+   A slow drift of gold motes across the viewport. It sits above both the
+   envelope scene and the invitation and never changes state, so the air is
+   identical before the envelope opens and all the way down the scroll.   */
+.ambient{
+  position:fixed;
+  inset:0;
+  z-index:55;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+@media (prefers-reduced-motion:reduce){
+  .ambient{display:none}
+}
