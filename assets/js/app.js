@@ -429,7 +429,7 @@
         drift: (Math.random() - 0.5) * 0.14,
         phase: Math.random() * Math.PI * 2,
         spin: 0.004 + Math.random() * 0.011,
-        alpha: 0.16 + Math.random() * 0.36
+        alpha: 0.3 + Math.random() * 0.45
       };
     }
 
@@ -443,12 +443,17 @@
         m.x += m.drift + Math.sin(m.phase) * 0.2;
         if (m.y < -14 || m.x < -14 || m.x > w + 14) { motes[i] = mote(false); continue; }
 
-        /* each mote breathes a little, the way leaf catches the light */
+        /* each mote breathes a little, the way leaf catches the light.
+           A near-white core inside a gold halo: the core carries the mote
+           over the envelope scene's mid-tan, the halo carries it over the
+           near-white paper of the invitation. One flat gold could not read
+           against both.                                                   */
         var a = m.alpha * (0.55 + 0.45 * Math.sin(m.phase * 1.7));
-        var rr = m.r * 3.2;
+        var rr = m.r * 3.4;
         var g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, rr);
-        g.addColorStop(0,   "rgba(226,200,135," + a + ")");
-        g.addColorStop(0.45,"rgba(176,141,63,"  + (a * 0.5) + ")");
+        g.addColorStop(0,   "rgba(255,247,219," + a + ")");
+        g.addColorStop(0.3, "rgba(226,200,135," + (a * 0.85) + ")");
+        g.addColorStop(0.62,"rgba(176,141,63,"  + (a * 0.4) + ")");
         g.addColorStop(1,   "rgba(176,141,63,0)");
         ctx.fillStyle = g;
         ctx.beginPath();
