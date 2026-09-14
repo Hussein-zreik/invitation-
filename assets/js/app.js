@@ -478,4 +478,151 @@
     size();
     window.requestAnimationFrame(frame);
   })();
+
+  /* ---------------- 8. the deck ----------------
+     The invitation is read a screen at a time: each section holds the
+     whole viewport and crosses into the next instead of scrolling past
+     it, and its contents arrive in sequence every time it comes round.
+     The envelope is untouched — it is still the gate onto all of this. */
+  (function deck() {
+    var wrap   = document.getElementById("invite");
+    var cue    = document.getElementById("deckCue");
+    if (!wrap) return;
+
+    var slides = Array.prototype.slice.call(wrap.children);
+    if (slides.length < 2) return;
+
+    var index = 0;
+    var busy  = false;
+    var STEP  = reduceMotion ? 0 : 820;   /* the length of one crossing */
+
+    /* The reveal observer belongs to a scrolling page: every slide sits at
+       inset:0, so it would count them all as arrived at once. On a deck the
+       slides hand out their own reveals instead.                          */
+    function takeOverReveals() {
+      if (revealObserver) { revealObserver.disconnect(); revealObserver = null; }
+      wrap.querySelectorAll(".reveal").forEach(function (el) {
+        el.classList.remove("is-in");
+        el.style.transitionDelay = "";
+      });
+    }
+
+    /* contents arrive in sequence, the way a hand lays cards down */
+    function dealIn(slide) {
+      var items = slide.querySelectorAll(".reveal");
+      items.forEach(function (el, i) {
+        el.style.transitionDelay = reduceMotion ? "0ms" : (90 + i * 130) + "ms";
+        el.classList.add("is-in");
+      });
+    }
+
+    function dealOut(slide) {
+      slide.querySelectorAll(".reveal").forEach(function (el) {
+        el.style.transitionDelay = "";
+        el.classList.remove("is-in");
+      });
+    }
+
+    function show(n) {
+      n = Math.max(0, Math.min(slides.length - 1, n));
+      if (n === index || busy) return;
+
+      var from = slides[index];
+      var to   = slides[n];
+      busy = true;
+
+      from.classList.remove("is-live");
+      from.setAttribute("aria-hidden", "true");
+      to.classList.add("is-live");
+      to.removeAttribute("aria-hidden");
+      to.scrollTop = 0;
+      index = n;
+
+      dealIn(to);
+      /* the one we left only resets once it is out of sight, so nothing
+         is seen snapping back mid-cross                                 */
+      window.setTimeout(function () { dealOut(from); busy = false; }, STEP);
+
+      cue.classList.toggle("is-on", index < slides.length - 1);
+    }
+
+    function next() { show(index + 1); }
+    function prev() { show(index - 1); }
+
+    /* --- a scratch card owns its own gestures --- */
+    function isScratch(el) {
+      return !!(el && el.closest && el.closest(".scratch-card"));
+    }
+
+    /* --- a slide taller than the screen scrolls before it hands over --- */
+    function atEnd(slide, down) {
+      if (slide.scrollHeight <= slide.clientHeight + 2) return true;
+      return down
+        ? slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 2
+        : slide.scrollTop <= 2;
+    }
+
+    var wheelLock = 0;
+    wrap.addEventListener("wheel", function (e) {
+      var now = Date.now();
+      if (now - wheelLock < 700 || Math.abs(e.deltaY) < 12) return;
+      var down = e.deltaY > 0;
+      if (!atEnd(slides[index], down)) return;
+      wheelLock = now;
+      down ? next() : prev();
+    }, { passive: true });
+
+    var y0 = null, t0 = 0;
+    wrap.addEventListener("touchstart", function (e) {
+      if (isScratch(e.target)) { y0 = null; return; }
+      y0 = e.touches[0].clientY;
+      t0 = Date.now();
+    }, { passive: true });
+
+    wrap.addEventListener("touchend", function (e) {
+      if (y0 === null) return;
+      var dy = e.changedTouches[0].clientY - y0;
+      var quick = Date.now() - t0 < 700;
+      y0 = null;
+      if (Math.abs(dy) < (quick ? 40 : 70)) return;
+      var down = dy < 0;
+      if (!atEnd(slides[index], down)) return;
+      down ? next() : prev();
+    }, { passive: true });
+
+    document.addEventListener("keydown", function (e) {
+      if (document.body.classList.contains("is-sealed")) return;
+      if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") { e.preventDefault(); next(); }
+      else if (e.key === "ArrowUp" || e.key === "PageUp") { e.preventDefault(); prev(); }
+      else if (e.key === "Home") { e.preventDefault(); show(0); }
+      else if (e.key === "End")  { e.preventDefault(); show(slides.length - 1); }
+    });
+
+    cue.addEventListener("click", next);
+
+    /* the hero's own cue used to jump to an anchor; here it hands over */
+    var heroCue = wrap.querySelector(".scroll-cue");
+    if (heroCue) heroCue.addEventListener("click", function (e) { e.preventDefault(); next(); });
+
+    /* --- start once the envelope has been opened --- */
+    function begin() {
+      wrap.classList.add("is-deck");
+      takeOverReveals();
+      slides.forEach(function (el, i) {
+        if (i !== 0) el.setAttribute("aria-hidden", "true");
+      });
+      slides[0].classList.add("is-live");
+      cue.hidden = false;
+      dealIn(slides[0]);
+      window.setTimeout(function () { cue.classList.add("is-on"); }, 700);
+    }
+
+    if (wrap.classList.contains("is-visible")) {
+      begin();
+    } else {
+      new MutationObserver(function (m, obs) {
+        if (wrap.classList.contains("is-visible")) { obs.disconnect(); begin(); }
+      }).observe(wrap, { attributes: true, attributeFilter: ["class"] });
+    }
+  })();
 })();
