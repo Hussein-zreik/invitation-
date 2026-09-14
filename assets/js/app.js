@@ -507,11 +507,20 @@
       });
     }
 
-    /* contents arrive in sequence, the way a hand lays cards down */
+    /* Each slide is parked a screen away per step from the live one, so
+       moving between them is a travel rather than a dissolve.            */
+    function place() {
+      slides.forEach(function (el, i) {
+        el.style.transform = "translate3d(0," + ((i - index) * 100) + "%,0)";
+      });
+    }
+
+    /* contents arrive in sequence, the way a hand lays cards down —
+       during the travel, so the slide never lands empty               */
     function dealIn(slide) {
       var items = slide.querySelectorAll(".reveal");
       items.forEach(function (el, i) {
-        el.style.transitionDelay = reduceMotion ? "0ms" : (90 + i * 130) + "ms";
+        el.style.transitionDelay = reduceMotion ? "0ms" : (i * 95) + "ms";
         el.classList.add("is-in");
       });
     }
@@ -537,6 +546,7 @@
       to.removeAttribute("aria-hidden");
       to.scrollTop = 0;
       index = n;
+      place();
 
       dealIn(to);
       /* the one we left only resets once it is out of sight, so nothing
@@ -612,6 +622,7 @@
         if (i !== 0) el.setAttribute("aria-hidden", "true");
       });
       slides[0].classList.add("is-live");
+      place();
       cue.hidden = false;
       dealIn(slides[0]);
       window.setTimeout(function () { cue.classList.add("is-on"); }, 700);
