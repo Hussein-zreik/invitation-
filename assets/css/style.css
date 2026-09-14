@@ -334,10 +334,7 @@ body::after{
 }
 .card--arch{
   border-radius:12rem 12rem 1rem 1rem;
-  /* the arch needs headroom, but the named fathers made the card taller
-     than the screen; the room comes out of the frame, not the names */
-  padding-top:3.7rem;
-  padding-bottom:2.4rem;
+  padding-top:4.5rem;
   position:relative;
 }
 .card--arch::before{
@@ -611,18 +608,16 @@ body::after{
    keeps the Arabic on this card gold the way the Bismillah is. Arabic is
    set a little larger — at a matched size it reads smaller than Latin. */
 .parent-name{
-  margin:.2rem 0 0;
+  margin:.15rem 0 0;
   font-family:var(--f-serif);
-  font-size:clamp(1.3rem,5.4vw,1.55rem);
-  font-weight:500;
-  line-height:1.3;
-  letter-spacing:.012em;
-  color:var(--ink);
+  font-size:.95rem;
+  line-height:1.4;
+  color:var(--gold-deep);
 }
 .parent-ar{
-  margin:.06rem 0 0;
+  margin:.1rem 0 0;
   font-family:var(--f-arabic);
-  font-size:clamp(1.4rem,6vw,1.7rem);
-  line-height:1.75;
+  font-size:clamp(.95rem,3.8vw,1.1rem);
+  line-height:1.9;
   color:var(--gold-deep);
 }
