@@ -334,7 +334,10 @@ body::after{
 }
 .card--arch{
   border-radius:12rem 12rem 1rem 1rem;
-  padding-top:4.5rem;
+  /* the arch needs headroom, but the named fathers made the card taller
+     than the screen; the room comes out of the frame, not the names */
+  padding-top:3.7rem;
+  padding-bottom:2.4rem;
   position:relative;
 }
 .card--arch::before{
@@ -573,6 +576,10 @@ body::after{
 @media (prefers-reduced-motion:reduce){
   .invite.is-deck > *{transition:none}
 }
+/* a panel's generous top and bottom padding is the breathing room between
+   sections of a scroll; on a deck each section owns the screen already */
+.invite.is-deck > .panel{padding-top:1.75rem;padding-bottom:1.75rem}
+.invite.is-deck > .closing{padding-top:2rem;padding-bottom:2.5rem}
 /* the spine is a thread down a scroll; on a deck each screen stands alone */
 .invite.is-deck > *::before,
 .invite.is-deck > *::after{content:none}
@@ -599,11 +606,23 @@ body::after{
   .deck-cue.is-on svg{animation:breathe 2.6s ease-in-out infinite}
 }
 
-/* the father's name again in Arabic, a shade quieter than the English */
+/* The fathers are named, not labelled: Playfair for the English rather
+   than the small caps used for "Son of", and Amiri for the Arabic, which
+   keeps the Arabic on this card gold the way the Bismillah is. Arabic is
+   set a little larger — at a matched size it reads smaller than Latin. */
+.parent-name{
+  margin:.2rem 0 0;
+  font-family:var(--f-serif);
+  font-size:clamp(1.3rem,5.4vw,1.55rem);
+  font-weight:500;
+  line-height:1.3;
+  letter-spacing:.012em;
+  color:var(--ink);
+}
 .parent-ar{
-  margin:.1rem 0 0;
+  margin:.06rem 0 0;
   font-family:var(--f-arabic);
-  font-size:clamp(.95rem,3.8vw,1.1rem);
-  line-height:1.9;
+  font-size:clamp(1.4rem,6vw,1.7rem);
+  line-height:1.75;
   color:var(--gold-deep);
 }
