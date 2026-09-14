@@ -7,12 +7,14 @@ window.INVITE = {
   groom: {
     name: "Hussein",                  // shown large, in script
     fullName: "Hussein Zreik",        // shown on the invitation itself
-    parents: "Mr & Mrs Zreik"
+    parents: "Ali Zreik",             // the father, under "Son of"
+    parentsArabic: "علي زريق"
   },
   bride: {
     name: "Maha",
     fullName: "Maha Maatouk",
-    parents: "Mr & Mrs Maatouk"
+    parents: "Youssef Maatouk",       // the father, under "Daughter of"
+    parentsArabic: "يوسف معتوق"
   },
   arabicNames: "حسين و مها",          // shown under the English, in the hero
   monogram: "H&M",          // shown on the wax seal

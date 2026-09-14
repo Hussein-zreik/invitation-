@@ -24,6 +24,8 @@
     brideFullName: cfg.bride && (cfg.bride.fullName || cfg.bride.name),
     groomParents: cfg.groom && cfg.groom.parents,
     brideParents: cfg.bride && cfg.bride.parents,
+    groomParentsArabic: cfg.groom && cfg.groom.parentsArabic,
+    brideParentsArabic: cfg.bride && cfg.bride.parentsArabic,
     ceremonyCaps: (cfg.ceremony || "") + " of",
     day:          cfg.date && cfg.date.day,
     month:        cfg.date && cfg.date.month,

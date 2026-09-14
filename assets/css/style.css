@@ -598,3 +598,12 @@ body::after{
 @media (prefers-reduced-motion:no-preference){
   .deck-cue.is-on svg{animation:breathe 2.6s ease-in-out infinite}
 }
+
+/* the father's name again in Arabic, a shade quieter than the English */
+.parent-ar{
+  margin:.1rem 0 0;
+  font-family:var(--f-arabic);
+  font-size:clamp(.95rem,3.8vw,1.1rem);
+  line-height:1.9;
+  color:var(--gold-deep);
+}
